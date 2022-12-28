@@ -64,7 +64,6 @@ const personGenerator = {
             else{
                 return this.GENDER_FEMALE;
             }
-        }
     },
 
 
