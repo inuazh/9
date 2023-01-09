@@ -2,67 +2,85 @@ const personGenerator = {
     surnameJson: `{  
         "count": 15,
         "list": {
-            "id_1": "Иванов",
-            "id_2": "Смирнов",
-            "id_3": "Кузнецов",
-            "id_4": "Васильев",
-            "id_5": "Петров",
-            "id_6": "Михайлов",
-            "id_7": "Новиков",
-            "id_8": "Федоров",
-            "id_9": "Кравцов",
-            "id_10": "Николаев",
-            "id_11": "Семёнов",
-            "id_12": "Славин",
-            "id_13": "Степанов",
-            "id_14": "Павлов",
-            "id_15": "Александров",
-            "id_16": "Морозов"
+            "id_1": "Ivanov",
+            "id_2": "Smirnov",
+            "id_3": "Kuznetsov",
+            "id_4": "Vasiliev",
+            "id_5": "Petrov",
+            "id_6": "Mikhailov",
+            "id_7": "Novikov",
+            "id_8": "Fedorov",
+            "id_9": "Kravtsov",
+            "id_10": "Nikolaev",
+            "id_11": "Semenov",
+            "id_12": "Slavin",
+            "id_13": "Stepanov",
+            "id_14": "Pavlov",
+            "id_15": "Alexandrov",
+            "id_16": "Morozov"
         }
     }`,
     firstNameMaleJson: `{
         "count": 10,
         "list": {     
-            "id_1": "Александр",
-            "id_2": "Максим",
-            "id_3": "Иван",
-            "id_4": "Артем",
-            "id_5": "Дмитрий",
-            "id_6": "Никита",
-            "id_7": "Михаил",
-            "id_8": "Даниил",
-            "id_9": "Егор",
-            "id_10": "Андрей"
+            "id_1": "Alexander",
+            "id_2": "Maxim",
+                        "id_3": "Ivan",
+                        "id_4": "Artem",
+            "id_5": "Dmitry",
+                        "id_6": "Nikita",
+            "id_7": "Mikhail",
+                        "id_8": "Daniel",
+                        "id_9": "Egor",
+            "id_10": "Andrey"
         }
     }`,
     firstNameFemJson: `{
         "count": 10,
         "list": {
-            "id_1": "Александра",
-            "id_2": "Максимильяна",
-            "id_3": "Иванесса",
-            "id_4": "Артемида",
-            "id_5": "Дмитрияна",
-            "id_6": "Ника",
-            "id_7": "Милана",
-            "id_8": "Дарья",
-            "id_9": "Елена",
-            "id_10": "Антонелла"
+            "id_1": "Alexandra",
+            "id_2": "Maximiliana",
+            "id_3": "Ivanessa",
+            "id_4": "Artemis",
+            "id_5": "Dmitriana",
+            "id_6": "Nika",
+            "id_7": "Milan",
+            "id_8": "Daria",
+            "id_9": "Elena",
+            "id_10": "Antonella"
         }
     }`,
 
-    GENDER_MALE: 'Мужчина',
-    GENDER_FEMALE: 'Женщина',
+    monthDateBirth: `{
+        "count": 12,
+        "list": {     
+            "id_1": "January",
+            "id_2": "February",
+            "id_3": "March",
+            "id_4": "April",
+            "id_5": "May",
+            "id_6": "June",
+            "id_7": "July",
+            "id_8": "August",
+            "id_9": "September",
+            "id_10": "October",
+            "id_11": "November",
+            "id_12": "December"
+        }
+    }`,
+
+    GENDER_MALE: 'Male',
+    GENDER_FEMALE: 'Female',
 
     randomIntNumber: (max = 1, min = 0) => Math.floor(Math.random() * (max - min + 1) + min),
-    
+
     randomValue: function (json) {
         const obj = JSON.parse(json);
         const prop = `id_${this.randomIntNumber(obj.count, 1)}`;  // this = personGenerator
         return obj.list[prop];
     },
 
-     randomFirstName: function() {
+    randomFirstName: function () {
         if (randomGenderNumber === 1) {
             return this.randomValue(this.firstNameMaleJson);
         } else {
@@ -70,7 +88,7 @@ const personGenerator = {
         }
     },
 
-    randomGender: function() {
+    randomGender: function () {
         let max = 1;
         let min = 0;
         randomGenderNumber = Math.floor(Math.random() * (max - min + 1) + min);
@@ -81,22 +99,35 @@ const personGenerator = {
         }
     },
 
-     randomSurname: function() {
-         if (randomGenderNumber === 1) {
+    randomSurname: function () {
+        if (randomGenderNumber === 1) {
             return this.randomValue(this.surnameJson);
         } else {
             let femSurname = this.randomValue(this.surnameJson);
             return femSurname + "a";
         }
     },
-    
-     randomBirth: function() {
-         let minYear = Math.ceil(1900);
-         let maxYear = Math.floor(2022);
-         let randomYear = Math.floor(Math.random() * (maxYear - minYear) + minYear);
-         return randomYear + " года рождения";
 
-     },
+    randomDate: function () {
+
+        let dateBirth = this.randomValue(this.monthDateBirth);
+        if (["January", "March", "May", "July", "August", "October", "December"].includes(dateBirth)) 
+        return `${this.randomIntNumber(31,1)} ${dateBirth}`
+    else if ((dateBirth === "february") && (this.isLeapYear(this.person.birthYear)))
+        return `${this.randomIntNumber(29,1)} ${dateBirth}`
+    else if (dateBirth === "february")
+        return `${this.randomIntNumber(28,1)} ${dateBirth}`
+    else
+        return `${this.randomIntNumber(30,1)} ${dateBirth}`
+    },
+
+    randomBirth: function () {
+        let minYear = Math.ceil(1940);
+        let maxYear = Math.floor(2000);
+        let randomYear = Math.floor(Math.random() * (maxYear - minYear) + minYear);
+        return randomYear + " year of birth";
+
+    },
 
 
     getPerson: function () {
@@ -104,6 +135,7 @@ const personGenerator = {
         this.person.gender = this.randomGender();
         this.person.firstName = this.randomFirstName();
         this.person.surname = this.randomSurname();
+        this.person.Date = this.randomDate();
         this.person.birth = this.randomBirth();
         return this.person;
     }
