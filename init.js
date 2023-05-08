@@ -7,4 +7,5 @@ window.onload = function()
     document.getElementById('genderOutput').innerText = initPerson.gender;
     document.getElementById("birthOutput").textContent = initPerson.birth;
     document.querySelector("#birthDateOutput").textContent = initPerson.Date;
+    document.querySelector("jobOutput").textContent = initPerson.Job;
 };

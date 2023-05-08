@@ -69,8 +69,35 @@ const personGenerator = {
         }
     }`,
 
+    jobJsonFemale: `{
+        "count": 7,
+        "list": {
+            "id_1": "BTL Manager",
+            "id_2": "ERP programmer",
+            "id_3": "Event Manager",
+            "id_4": "HTML coder",
+            "id_5": "PR specialist",
+            "id_6": "SEO Specialist",
+            "id_7": "Web designer",
+        }
+    }`,
+
+    jobJsonMale: `{
+        "count": 7,
+        "list": {
+            "id_1": "engineer",
+            "id_2": "physicist",
+            "id_3": "Event Manager",
+            "id_4": "firefighter",
+            "id_5": "PR specialist",
+            "id_6": "boatswain",
+            "id_7": "Web designer",
+        }
+    }`,
+
     GENDER_MALE: 'Male',
     GENDER_FEMALE: 'Female',
+
 
     randomIntNumber: (max = 1, min = 0) => Math.floor(Math.random() * (max - min + 1) + min),
 
@@ -111,14 +138,14 @@ const personGenerator = {
     randomDate: function () {
 
         let dateBirth = this.randomValue(this.monthDateBirth);
-        if (["January", "March", "May", "July", "August", "October", "December"].includes(dateBirth)) 
-        return `${this.randomIntNumber(31,1)} ${dateBirth}`
-    else if ((dateBirth === "february") && (this.isLeapYear(this.person.birthYear)))
-        return `${this.randomIntNumber(29,1)} ${dateBirth}`
-    else if (dateBirth === "february")
-        return `${this.randomIntNumber(28,1)} ${dateBirth}`
-    else
-        return `${this.randomIntNumber(30,1)} ${dateBirth}`
+        if (["January", "March", "May", "July", "August", "October", "December"].includes(dateBirth))
+            return `${this.randomIntNumber(31, 1)} ${dateBirth}`
+        else if ((dateBirth === "february") && (this.isLeapYear(this.person.birthYear)))
+            return `${this.randomIntNumber(29, 1)} ${dateBirth}`
+        else if (dateBirth === "february")
+            return `${this.randomIntNumber(28, 1)} ${dateBirth}`
+        else
+            return `${this.randomIntNumber(30, 1)} ${dateBirth}`
     },
 
     randomBirth: function () {
@@ -129,7 +156,15 @@ const personGenerator = {
 
     },
 
-
+    randomJob: function () {
+        if (this.person.gender === this.GENDER_MALE) {
+            return this.randomValue(this.jobJsonMale);
+        }
+        else if (this.person.gender === this.GENDER_FEMALE){
+            return this.randomValue(this.jobJsonFemale);
+        }
+    },
+    
     getPerson: function () {
         this.person = {};
         this.person.gender = this.randomGender();
@@ -137,6 +172,8 @@ const personGenerator = {
         this.person.surname = this.randomSurname();
         this.person.Date = this.randomDate();
         this.person.birth = this.randomBirth();
+      //  this.person.Job = this.randomJob();
+
         return this.person;
     }
 };
