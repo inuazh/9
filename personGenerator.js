@@ -25,13 +25,13 @@ const personGenerator = {
         "list": {     
             "id_1": "Alexander",
             "id_2": "Maxim",
-                        "id_3": "Ivan",
-                        "id_4": "Artem",
+            "id_3": "Ivan",
+            "id_4": "Artem",
             "id_5": "Dmitry",
-                        "id_6": "Nikita",
+            "id_6": "Nikita",
             "id_7": "Mikhail",
-                        "id_8": "Daniel",
-                        "id_9": "Egor",
+            "id_8": "Daniel",
+            "id_9": "Egor",
             "id_10": "Andrey"
         }
     }`,
@@ -78,7 +78,7 @@ const personGenerator = {
             "id_4": "HTML coder",
             "id_5": "PR specialist",
             "id_6": "SEO Specialist",
-            "id_7": "Web designer",
+            "id_7": "Web designer"
         }
     }`,
 
@@ -91,9 +91,26 @@ const personGenerator = {
             "id_4": "firefighter",
             "id_5": "PR specialist",
             "id_6": "boatswain",
-            "id_7": "Web designer",
+            "id_7": "Web designer"
         }
     }`,
+
+    patronymicJson: `{
+        "count": 10,
+        "list": {
+            "id_1": "Александрович",
+            "id_2": "Максимович",
+            "id_3": "Иванович",
+            "id_4": "Дмитриевич",
+            "id_5": "Алексеевич",
+            "id_6": "Николаевич",
+            "id_7": "Петрович",
+            "id_8": "Сергеевич",
+            "id_9": "Андреевич",
+            "id_10": "Владимирович"
+        }
+    }`,
+
 
     GENDER_MALE: 'Male',
     GENDER_FEMALE: 'Female',
@@ -159,21 +176,42 @@ const personGenerator = {
     randomJob: function () {
         if (this.person.gender === this.GENDER_MALE) {
             return this.randomValue(this.jobJsonMale);
-        }
-        else if (this.person.gender === this.GENDER_FEMALE){
+        } else {
             return this.randomValue(this.jobJsonFemale);
         }
     },
     
+
+    randomPatronymic: function () {
+        if (this.person.gender === this.GENDER_MALE) {
+            return this.randomValue(this.patronymicJson);
+        } else {
+            return this.randomValue(this.patronymicJson) + "a";
+        }
+    },
+
     getPerson: function () {
         this.person = {};
         this.person.gender = this.randomGender();
         this.person.firstName = this.randomFirstName();
+        this.person.randomPatronymic = this.randomPatronymic();
         this.person.surname = this.randomSurname();
         this.person.Date = this.randomDate();
         this.person.birth = this.randomBirth();
-      //  this.person.Job = this.randomJob();
+         this.person.Job = this.randomJob();
 
         return this.person;
     }
+
+
+    
+
+    
+
 };
+
+
+
+
+
+// сделать работу и кнопку перезагрузки задания upd есть релоад нет работы

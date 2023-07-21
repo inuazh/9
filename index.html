@@ -20,15 +20,19 @@
                     <div class="row">
                         <div class="col">
                             <h3 class="card-title"><span id="surnameOutput">Генерация фамилии</span></h3>
-                            <h4>Name: <span id="firstNameOutput">Иван</span></h4>
+                            <h4>Name: <span id="firstNameOutput">Иван</span></h4> 
+                            <h4>Patronymic: <span id="patronomycNameOutput">Иван</span></h4> 
                             <p>
                                 <span id="genderOutput">Генерация пола</span>
                                 <span>, </span>
                                 <span id="birthDateOutput"></span>
                                 <span id="birthOutput"></span>
-                               
+                                <br>
+                                <span id="jobOutput"></span>
                             </p>
-                            <span id="jobOutput"></span>
+                            
+                            <button id="reloadButton">Reload Data</button>
+
                         </div>
                     </div>
                 </div>
@@ -38,5 +42,7 @@
 </div>
 <script src="personGenerator.js"></script>
 <script src="init.js"></script>
+
+<script src="reload.js"></script>
 </body>
 </html>
